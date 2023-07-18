@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import {  Redirect  , Route, Switch } from 'react-router-dom';
+import Login from "./Components/UserEntry/Login";
+import Signup from "./Components/UserEntry/Signup";
+import Forgot from "./Components/UserEntry/Forgot/Forgot";
+import MainDash from "./Components/DashBoard/MainDash/MainDash";
+import AccountActivation from "./Components/UserEntry/AccountActivation";
+import ResetPassword from "./Components/UserEntry/Forgot/ResetPassword";
+import Nopage from "./Components/NoPage/Nopage";
 
 function App() {
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     
+      <Switch>
+        <Route path='/maindash'>
+          <MainDash />
+        </Route>
+        <Route exact path='/'>
+             <Redirect to='/maindash'/>
+        </Route>
+        <Route path='/login'>
+          <Login />
+        </Route>
+        <Route path='/signup'>
+          <Signup />
+        </Route>
+        <Route path='/activate'>
+          <AccountActivation />
+        </Route>
+        <Route path='/forgot'>
+          <Forgot />
+        </Route>
+        <Route path='/resetpassword'>
+          <ResetPassword />
+        </Route>
+
+        <Route path="**">
+          <Nopage />
+        </Route>
+      </Switch>
     </div>
   );
 }
